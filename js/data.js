@@ -1,5 +1,5 @@
 // ===== EDIT ME: personal info placeholders =====
-const ME = { brand: 'SHIFT/', name: 'MANSOOR SHAIKH', role: 'Product Designer & Product Management Enthusiast', email: 'shaikhmansoor178@gmail.com', phone: '7208248166', resume: 'https://drive.google.com/file/d/1IW8fEm6Jmo4MXIDA9acAb55xm9xE8Djk/view?usp=sharing', bio: 'Designer somewhere between pixels, products, and overthinking every tiny detail. When I’m not designing, you’ll probably find me at the gym, running, discovering new music, or pretending I have my life figured out.' };
+const ME = { brand: 'M.S', name: 'MANSOOR SHAIKH', role: 'Product Designer & Product Management Enthusiast', email: 'shaikhmansoor178@gmail.com', phone: '7208248166', resume: 'https://drive.google.com/file/d/1IW8fEm6Jmo4MXIDA9acAb55xm9xE8Djk/view?usp=sharing', bio: 'Designer somewhere between pixels, products, and overthinking every tiny detail. When I’m not designing, you’ll probably find me at the gym, running, discovering new music, or pretending I have my life figured out.' };
 // ===== EDIT ME: projects (set img to a URL/data-URI when you have the real Meryl Roberts assets) =====
 const P = [
     { id: 'nextstep', n: '01', name: 'NextStep', title: 'Early Detection of Learning Disabilities & Support for Students', year: '', tags: ['IoT Design', 'Learning Disability Screening', 'Early Intervention'], tone: '#2f3a4a', img: 'assets/images/nextstep2.png', video: 'assets/video/nextstep1.mp4', poster: 'assets/images/nextstep1-poster.jpg', videoRatio: '1122/532',
@@ -125,9 +125,6 @@ const P = [
     { type: 'feature', video: 'assets/video/gm_video.mp4', w: 406, h: 788, alt: 'Google Maps Parking walkthrough', title: '', text: 'Google Maps Parking integrates parking discovery directly into the navigation experience. Users can find nearby parking spots, compare locations, check availability and pricing, view photos and operating hours, and understand peak parking times — all before reaching their destination. This reduces the time spent driving around looking for a spot and makes the overall journey more predictable.', bg: '#000000', fg: '#ffffff' }
       ] }];
 
-// Optional background photo for the "My Origin Story" section, e.g. 'assets/images/origin-bg.jpg' (leave '' to show the placeholder)
-const ORIGIN_BG = 'assets/images/background.jpg';
-const ORIGIN_BG_ROTATE = true; // photo is portrait: true = rotate it to a horizontal band, false = keep upright (cropped)
 
 // About page: story paragraphs (above Education) and education lines
 const ABOUT_TEXT = [

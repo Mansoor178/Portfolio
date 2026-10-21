@@ -5,28 +5,39 @@ const img = p => p.img
 const card = p => `<a class="card rv" href="#/work/${p.id}" aria-label="${p.name}: ${p.title}"><div class="im" style="background:${p.tone}">${img(p)}</div><div class="cap">${p.name}</div><span class="vp">View Project ↗</span></a>`;
 const connect = (cls = 'rv', resume = false) => `<section class="conn conn--page ${cls}"><div class="cg"><p class="ghost" aria-hidden="true">LET’S CONNECT</p><div class="cname">${ME.name}</div></div><div class="ci ci--one"><h4>Contact me:</h4><div class="cline"><div class="cl-left"><a class="crow" href="mailto:${ME.email}"><span aria-hidden="true">✉️</span>${ME.email}</a>${resume ? `<a class="crow" href="${ME.resume}" target="_blank" rel="noopener"><span aria-hidden="true">📄</span>Resume</a>` : ''}</div><a class="crow" href="tel:${ME.phone}"><span aria-hidden="true">📞</span>${ME.phone}</a></div></div></section>`;
 const conn = connect();
+
+// ---- home hero: huge drifting name behind the portrait, left text, name + CTA (see js/fx.js) ----
+const heroHTML = () => {
+    const [w1, w2] = ME.name.split(' '); const row = w => `<div class="bgrow"><div class="bgtrack">${[0, 1, 2, 3].map(() => `<span>${w}</span>`).join('')}</div></div>`;
+    return `<section class="hero2" id="hero2"><div class="bgname" aria-hidden="true">${row(w1)}${row(w2)}</div><div class="hportrait"><img src="assets/images/image2.png" alt="Portrait of ${ME.name}" width="604" height="413"><canvas aria-hidden="true"></canvas></div><div class="hleft"><h1><span>Product Designer</span><span>Product Management Enthusiast</span></h1></div><div class="hright"><div class="hname">${ME.name}</div><a class="pill" href="#/work">Skip to Work <i>↗</i></a></div></section>`
+};
+// ---- curated projects: pinned stage, scroll-linked (see js/fx.js) ----
+const curated = () => `<section class="cps" id="cps" style="--n:${P.length}" aria-label="Curated Projects"><div class="cps-pin"><div class="cps-bg" aria-hidden="true">Curated Projects</div><h2 class="sr">Curated Projects</h2><p class="cps-sub">Selected work.</p><div class="cps-stage">${P.map((p, i) => `<a class="cps-item${i ? '' : ' on'}" href="#/work/${p.id}" aria-label="${p.name}: ${p.title}"><img src="${p.img}" alt="${p.name}" loading="lazy"><span class="vp">View Project ↗</span></a>`).join('')}</div><div class="cps-info">${P.map((p, i) => `<div${i ? '' : ' class="on"'}><h3>${p.name}</h3><p>${p.title}</p></div>`).join('')}</div><a class="pill cps-cta" href="#/work">View all work <i>↗</i></a><div class="cps-nav" role="group" aria-label="Projects">${P.map((p, i) => `<button type="button"${i ? '' : ' aria-current="true"'}><sup>${p.n}</sup>${p.name}</button>`).join('')}</div><div class="cps-bar"></div></div></section>`;
+// ---- sidelines: tilted polaroids drifting sideways ----
+const SIDE = ['sideline1.jpg.png', 'sideline2.jpg', 'sideline3.jpg', 'sideline4.jpg', 'sideline5.jpg', 'sideline6.jpg'];
+const sidelinesHTML = () => `<section class="sl"><div class="slh rv"><h2>The Sidelines</h2><p>Things I enjoy besides design work.</p></div><div class="slx" aria-label="Sketches"><div class="sltrack">${[0, 1, 2].map(k => SIDE.map((f, i) => `<figure class="pol"${k ? ' aria-hidden="true"' : ''}><img src="assets/images/${f}" alt="${k ? '' : 'Sketch ' + (i + 1)}" draggable="false"></figure>`).join('')).join('')}</div></div></section>`;
+// ---- about: photo carousel (greyscale -> colour), replaces the circle collage ----
+const galleryHTML = () => `<section class="gal rv" aria-label="Photo gallery"><div class="galv" tabindex="0" role="group" aria-label="Photo carousel, drag to move"><div class="galt">${[1, 2, 3, 4, 5, 6, 7].map(i => `<figure class="gi"><div class="gp"><img src="assets/images/photo${i}.jpg" alt="Photo ${i}" loading="lazy" draggable="false"></div></figure>`).join('')}</div><span class="gdrag" aria-hidden="true">Drag ↔</span></div></section>`;
 const R = {
-    '/': () => `<section class="hero"><h1 class="rv in">${ME.brand}</h1><div class="n rv in">${ME.name}</div><div class="r rv in">${ME.role}</div><a class="pill rv in" href="#/work">Skip to Work <i>↗</i></a></section>
+    '/': () => `${heroHTML()}
 <section class="about about--portrait">
     <p class="ghost rv" aria-hidden="true">ABOUT</p>
     <div class="photo rv"><img src="assets/images/portrait.png" alt="Mansoor Shaikh saluting at the camera">
     </div>
 </section><p class="bio rv">${ME.bio}</p>
-<section class="wrap"><div class="h rv"><span>Curated Projects</span></div><p class="sub rv">Selected work.</p></section>
-<div class="grid">${P.map(card).join('')}</div>
-<div class="center"><a class="pill rv" href="#/work">View all work <i>↗</i></a></div>
-<section class="origin rv"><div class="origin-bg${ORIGIN_BG_ROTATE ? ' origin-bg--rot' : ''}" role="img" aria-label="Background image placeholder">${ORIGIN_BG ? `<img src="${ORIGIN_BG}" alt="">` : '[BACKGROUND IMAGE — set ORIGIN_BG in js/data.js]'}</div><div class="photo" data-p=".05" style="justify-self:center"><img src="assets/images/origin.png" alt="Mansoor in profile with his riding helmet on his back"></div><div class="t"><h3>My Origin Story</h3><p>"Who loves their job anyway, right?" - what I told myself  before I learnt about UI/UX design.</p><a class="pill" href="#/about">Read a bit more about me <i>↗</i></a></div></section>
-<section class="wrap" style="margin-top:100px"><div class="h rv"><span>The Sidelines</span></div><p class="sub rv">Things I enjoy besides design work.</p><div class="side rv" aria-label="Sketches"><div class="track">${[0, 1, 2].map(k => ['sideline1.jpg.png', 'sideline2.jpg', 'sideline3.jpg', 'sideline4.jpg', 'sideline5.jpg', 'sideline6.jpg'].map((f, i) => `<div${k ? ' aria-hidden="true"' : ''}><img src="assets/images/${f}" alt="${k ? '' : 'Sketch ' + (i + 1)}"></div>`).join('')).join('')}</div></div></section>
+${curated()}
+<section class="origin rv"><figure class="ofig" data-p=".05"><img src="assets/images/image3.png" alt="Neon portrait of Mansoor Shaikh" loading="lazy"></figure><div class="t"><h3>My Story</h3><p>"Who loves their job anyway, right?" - what I told myself  before I learnt about UI/UX design.</p><a class="pill" href="#/about">Read a bit more about me <i>↗</i></a></div></section>
+${sidelinesHTML()}
 ${conn}`,
     '/about': () => `<section class="about about--overlap"><p class="ghost" aria-hidden="true">ABOUT</p></section>
 <section class="ab rv"><div class="cut"><img src="assets/images/portrait2.png" alt="Mansoor Shaikh seated, cutout portrait"></div><div class="tx"><div class="story">${ABOUT_TEXT.map(t => `<p>${t}</p>`).join('')}</div><h4>EDUCATION</h4>${EDUCATION.map(t => `<p>${t}</p>`).join('')}</div></section>
 <section class="feat rv"><div class="ph2"><img src="assets/images/feature.jpg" alt="Mansoor on stage at a college event"></div></section>
 <p class="cap2 rv">${ABOUT_CAPTION}</p>
-<section class="clw rv"><div class="cl" role="group" aria-label="Photo collage">${[[.1, 9.5, 19.6], [11.5, 22.9, 32.3], [30.1, .5, 24.9], [52.4, 5.9, 33], [75.4, 34.5, 24], [39, 50.7, 28.3], [3.5, 59.8, 22.5]].map((c, i) => `<div style="left:${c[0]}%;top:${c[1]}%;width:${c[2]}%;z-index:${i % 3}"><img src="assets/images/photo${i + 1}.jpg" alt="Photo ${i + 1}" loading="lazy"></div>`).join('')}</div></section>
+${galleryHTML()}
 <p class="bio rv" style="padding-bottom:30px">${ABOUT_CLOSING}</p><div class="center" style="margin:0 0 110px"><a class="pill rv" href="#/contact">Get in touch with me <i>↗</i></a></div>
 <section class="wrap"><div class="h rv"><span>Check out some of my work</span></div></section><div class="grid" style="margin-top:30px">${P.map(card).join('')}</div><div class="center"><a class="pill rv" href="#/work">View all work <i>↗</i></a></div>`,
-    '/work': () => `<section class="about" style="height:clamp(300px,45vw,480px)"><p class="ghost" aria-hidden="true">PROJECTS</p></section>
-${P.map(p => `<article class="pr rv"><a class="im2" href="#/work/${p.id}" aria-label="${p.name}"><div class="im" style="background:${p.tone}">${img(p)}</div></a><div><h3>${p.name}</h3><div class="m">${[p.year, ...p.tags].filter(Boolean).join(' · ')}</div><p>${p.title}</p><a class="pill" href="#/work/${p.id}">View Full Project <i>↗</i></a></div></article>`).join('')}`,
+    '/work': () => `<section class="wk-hero"><p class="ghost wk-bg" aria-hidden="true">PROJECTS</p></section>
+${P.map(p => `<article class="pr rv"><a class="im2" href="#/work/${p.id}" aria-label="${p.name}"><div class="im" style="background:${p.tone}">${img(p)}</div><span class="vp">View Project ↗</span></a><div><div class="no" aria-hidden="true">${p.n}</div><h3>${p.name}</h3><div class="m">${[p.year, ...p.tags].filter(Boolean).join(' · ')}</div><p>${p.title}</p><a class="pill" href="#/work/${p.id}">View Full Project <i>↗</i></a></div></article>`).join('')}`,
     '/contact': () => connect('rv in', true)
 };
 const para = a => a.map(t => `<p>${t}</p>`).join('');
@@ -82,7 +93,7 @@ let ready = 0; const tio = new IntersectionObserver(es => es.forEach(e => { if (
 function split(el) { const t = el.textContent; let n = 0; el.dataset.s = 1; el.classList.add('tt'); el.innerHTML = `<span class="sr">${t}</span><span aria-hidden="true">${t.split(' ').map(w => `<span class="w">${[...w].map(c => `<span class="ch" style="--i:${n++}">${c}</span>`).join('')}</span>`).join(' ')}</span>` }
 function titles() { $$('.ghost,.hero h1,.det h1,.h>span').forEach(el => { if (!el.dataset.s) split(el); if (ready && !el.classList.contains('play')) tio.observe(el) }) }
 function watch() { $$('.rv:not(.in)').forEach((el, i) => { el.style.transitionDelay = (i % 3) * .08 + 's'; io.observe(el) }) }
-function bind() { gifFallback(); $$('.card').forEach(c => { const v = c.querySelector('.vp'); c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); v.style.transform = `translate(${e.clientX - r.left - 50}px,${e.clientY - r.top - 18}px)` }) }) }
+function bind() { gifFallback(); if (window.fxInit) fxInit(); $$('.card').forEach(c => { const v = c.querySelector('.vp'); c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); v.style.transform = `translate(${e.clientX - r.left - 50}px,${e.clientY - r.top - 18}px)` }) }) }
 let tk = 0; addEventListener('scroll', () => { if (RM || tk) return; tk = 1; requestAnimationFrame(() => { $$('[data-p]').forEach(el => { const r = el.getBoundingClientRect(); el.style.transform = `translateY(${(r.top + r.height / 2 - innerHeight / 2) * -el.dataset.p}px)` }); tk = 0 }) }, { passive: true });
 document.addEventListener('click', e => { const a = e.target.closest('a[href^="#/"]'); if (a && a.getAttribute('href') === location.hash) { e.preventDefault() } });
 addEventListener('hashchange', go);

@@ -71,3 +71,13 @@ Set `ORIGIN_BG` in `js/data.js` (e.g. `'assets/images/origin-bg.jpg'`) to show y
 - Card / Work image: `assets/images/gm_cover.png`. Page content is `media` in `js/data.js`: gm1 intro image, five colour panels (gm2-gm6, each with its own title, text and colours) and the walkthrough video with its text.
 - The phone screens gm2-gm6 had a solid black surround; it was made transparent so they sit on the colour panels (originals are in `assets/images/_previous/`).
 - Every project page now opens with the same heading, description and tags (name, `title`, `tags` in `js/data.js`).
+
+## v2 redesign (purple palette + motion)
+- `js/fx.js` holds all section effects (one requestAnimationFrame loop; each effect runs only while on screen; respects prefers-reduced-motion):
+  - Home hero: two huge drifting rows (MANSOOR / SHAIKH, constant speed, unaffected by hover) behind `assets/images/image2.png`; greyscale portrait with a fading colour-reveal trail that follows the cursor (wanders on its own on touch screens).
+  - Curated Projects: pinned scroll stage, the centre image / text / selector row follow scroll; hover or click the selector to jump.
+  - Sidelines: tilted polaroids that drift sideways (drag to move, slows on hover, centre card grows).
+  - About gallery: greyscale -> colour drag carousel (mouse/touch drag with momentum, arrow keys when focused) with the 7 photos from the old collage.
+  - Work page: halftone heading and tilting project images, same language as the curated stage.
+- Brand is `ME.brand` = "M.S" (nav logo and loader). Origin Story uses `assets/images/image3.png`; the old background photo was removed.
+- Colours: the palette lives in the `:root` variables at the top of `css/styles.css` (--bg, --rose [lavender accent], --txt, --dim, --line).
