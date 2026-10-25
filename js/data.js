@@ -123,7 +123,8 @@ const P = [
     { type: 'feature', src: 'assets/images/gm5.png', w: 390, h: 761, alt: 'Parking details page showing spots available and price per hour', title: 'Check availability & pricing', text: 'Users can see how many spots are available and understand the hourly parking cost before deciding where to park.', bg: '#fbbc04', fg: '#1a1a1a' },
     { type: 'feature', src: 'assets/images/gm6.png', w: 409, h: 784, alt: 'Parking details with daily prices and a popular-times graph', title: 'Choose the best option', text: 'The popular-time graph helps users understand when parking is typically busy, allowing them to make a more informed decision before arriving.', bg: '#c5221f', fg: '#ffffff' },
     { type: 'feature', video: 'assets/video/gm_video.mp4', w: 406, h: 788, alt: 'Google Maps Parking walkthrough', title: '', text: 'Google Maps Parking integrates parking discovery directly into the navigation experience. Users can find nearby parking spots, compare locations, check availability and pricing, view photos and operating hours, and understand peak parking times — all before reaching their destination. This reduces the time spent driving around looking for a spot and makes the overall journey more predictable.', bg: '#000000', fg: '#ffffff' }
-      ] }];
+      ] },
+    { id: 'nike-adidas-puma', n: '04', name: 'Nike × Adidas × Puma', title: 'Rethinking sportswear discovery', year: '', tags: ['UX Research', 'Competitive Analysis', 'UI/UX'], tone: '#1a1128', img: 'assets/images/nap_thumb.jpg', nap: true }];
 
 
 // About page: story paragraphs (above Education) and education lines

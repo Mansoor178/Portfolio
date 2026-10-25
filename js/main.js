@@ -65,6 +65,7 @@ function stackPage(p, nx) {
 }
 function proj(id) {
     const i = P.findIndex(p => p.id === id); if (i < 0) return null; const p = P[i], nx = P[(i + 1) % P.length];
+    if (p.nap) return napPage(p, nx);
     if (p.media) return stackPage(p, nx);
     const hero = p.video
         ? `<div class="im vid rv" style="--ar:${p.videoRatio || '16/9'};background:#000"><video src="${p.video}" poster="${p.poster || ''}" autoplay muted loop playsinline controls preload="metadata" aria-label="${p.name} prototype walkthrough"></video></div>`
